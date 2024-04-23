@@ -1,0 +1,55 @@
+// VARIABLER
+$line-height: 150%;
+$font-style: sans-serif;
+$bar-color: #fff;
+$ball-color: #fff;
+$link-color: rgb(0, 0, 255);
+
+/* Färgschema för ljust */
+$main-color: #9befd9;
+$text-color: black;
+$background-color: #9CAFAA;
+
+
+/* Färgschema för mörkt */
+$main-color-dark: darken($main-color, 30%);
+$text-color-dark: lighten($text-color, 99%);
+$background-color-dark: darken($background-color, 40%);
+
+@mixin center-element {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+@mixin h1-styles {
+    font-size: 2em;
+    font-weight: 600;
+    line-height: $line-height;
+    margin-bottom: 0%;
+    font-family: $font-style;
+}
+
+@mixin h2-styles {
+    font-size: 1.5em;
+    font-weight: 600;
+    line-height: $line-height;
+    margin-bottom: 0%;
+    font-family: $font-style;
+}
+
+@mixin h3-styles {
+    font-size: 1.2em;
+    line-height: $line-height;
+    margin-bottom: 0%;
+    font-family: $font-style;
+}
+
+@mixin p-styles {
+    font-size: 1em;
+    line-height: $line-height;
+    margin-top: 0%;
+    font-family: $font-style;
+
+}

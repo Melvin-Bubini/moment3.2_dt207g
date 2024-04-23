@@ -1,0 +1,307 @@
+@use 'base';
+
+
+//Body
+body {
+    width: 100vw;
+    height: 100vh;
+    padding: 0%;
+    margin: 0%;
+    overflow-x: hidden;
+    line-height: base.$line-height;
+
+}
+
+
+/* HEADER STYLES*/
+
+/* STÖRRE SKÄRMAR */
+header {
+    display: flex;
+    align-items: center;
+    background-color: black;
+}
+
+#logo {
+    width: 5em;
+}
+
+#logo-text {
+    color: base.$text-color;
+    width: fit-content;
+    text-decoration: none;
+    margin-left: 1em;
+    width: 15%;
+}
+
+#open-menu {
+    display: none;
+}
+
+#nav-menu {
+    display: none;
+}
+
+#bigScreenList {
+    display: flex;
+    width: 65%;
+    list-style-type: none;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 1em;
+}
+
+.menyLänkar {
+    color: base.$text-color;
+    text-decoration: none;
+    @include base.h2-styles;
+    padding: 0.5em;
+}
+
+.menyLänkar:hover {
+    cursor: pointer;
+    color: white;
+    border: solid black 3px;
+}
+
+/*menyknapp för att öppna menyn*/
+
+#open-menu {
+    margin-left: auto;
+}
+
+.menu-btn {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    border: solid black 2px;
+    cursor: pointer;
+    margin-right: 5%;
+}
+
+.menu-btn .menu-text {
+    display: inline-block;
+}
+
+.menu-btn:hover {
+    box-shadow: 0 0px 5px black;
+}
+
+.menu-icon {
+    margin-right: 10Px;
+}
+
+.bars {
+    display: block;
+    width: 20px;
+    height: 3px;
+    background-color: black;
+    margin: 5px 0;
+}
+
+/*menyknapp för stäng*/
+.close {
+    padding: 10px 15px;
+}
+
+/*roterar två streck till ett kryss*/
+.cross1 {
+    width: 25px;
+    transform: rotate(45deg);
+    position: relative;
+    top: 5px;
+}
+
+.cross2 {
+    width: 25px;
+    transform: rotate(135deg);
+    position: relative;
+    top: -3px;
+}
+
+/* MOBILLÄGE */
+@media screen and (max-width: 800px) {
+
+    #bigScreenList {
+        display: none;
+    }
+
+    #open-menu {
+        display: flex;
+    }
+
+    nav {
+        box-shadow: 0 0px 10px black;
+        font-size: 26px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100vh;
+        display: none;
+        z-index: 1000;
+        width: 50%;
+        background-color: black;
+    }
+
+    nav ul {
+        width: 100%;
+        list-style-type: none;
+        text-align: center;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    nav li {
+        width: 100%;
+        margin-top: 1em;
+    }
+
+    nav a {
+        color: base.$text-color;
+        text-decoration: none;
+        font-weight: 600;
+        @include base.p-styles;
+    }
+
+    nav a:hover {
+        cursor: pointer;
+        color: white;
+    }
+
+    .menu-text {
+        color: base.$text-color;
+    }
+}
+
+// Main
+
+main {
+    @include base.center-element;
+}
+
+#about {
+    @include base.center-element;
+    padding: 1em;
+}
+
+#cvArticle {
+    width: 50%;
+    background-color: white;
+    padding: 1em;
+}
+
+#cvForm {
+    width: 100%;
+    @include base.center-element;
+    margin-top: 1em;
+
+    button {
+        background-color: rgb(0, 203, 0);
+        border: 2px solid black;
+        @include base.p-styles;
+    }
+
+    button:hover {
+        background-color: rgb(106, 253, 106);
+        cursor: pointer;
+    }
+}
+
+input {
+    width: 30%;
+}
+
+.cv {
+    border: 2px solid black;
+    padding: 1em;
+    margin-top: 1em;
+
+    button {
+        background-color: red;
+        border: 2px solid black;
+        @include base.p-styles;
+    }
+
+    button:hover {
+        background-color: rgb(250, 118, 118);
+        cursor: pointer;
+    }
+}
+
+
+// Footer
+footer {
+    margin: 0%;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    margin-top: 2em;
+    background-color: base.$main-color;
+}
+
+footer p {
+    width: fit-content;
+    margin-left: 2em;
+    font-weight: 600;
+    margin-top: 1em;
+    @include base.p-styles;
+}
+
+// FÄRGSCHEMAN
+
+@media (prefers-color-scheme: light) {
+
+    header,
+    footer,
+    nav,
+    .menu-btn {
+        background-color: base.$main-color;
+    }
+
+    body, .cv {
+        background-color: base.$background-color;
+    }
+
+    p,
+    h1,
+    h2,
+    li,
+    ul,
+    .courseplan:hover,
+    span,
+    label,
+    .formRubrik {
+        color: base.$text-color;
+    }
+
+    .courseplan {
+        color: base.$link-color;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+
+    header,
+    footer,
+    nav,
+    .menu-btn {
+        background-color: base.$main-color-dark;
+    }
+
+    body, .cv {
+        background-color: base.$background-color-dark;
+    }
+
+    p,
+    h1,
+    h2,
+    li,
+    ul,
+    .courseplan:hover,
+    span,
+    label,
+    .formRubrik {
+        color: base.$text-color-dark;
+    }
+}
