@@ -1,6 +1,8 @@
 "use strict";
 let url = "http://127.0.0.1:3000/jobs";
 let cvArticle = document.getElementById("cvArticle");
+// Lägg till en referens till felmeddelande-spanet
+const errorSpan = document.getElementById("errorSpan");
 getData(); // Hämta datan när sidan laddas
 async function getData() {
     try {
@@ -16,6 +18,13 @@ async function getData() {
 }
 async function createCv(companyname, jobtitle, location) {
     try {
+        // Validera inputfälten
+        if (!companyname || !jobtitle || !location) {
+            errorSpan.textContent = "Alla f\xe4lt \xe4r obligatoriska.";
+            return;
+        }
+        // Ta bort eventuellt tidigare felmeddelande
+        errorSpan.textContent = "";
         const response = await fetch(url, {
             method: "POST",
             headers: {
