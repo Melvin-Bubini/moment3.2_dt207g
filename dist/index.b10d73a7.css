@@ -215,7 +215,7 @@ input {
   padding: 1em;
 }
 
-.cv button {
+.cv .delete-button {
   background-color: red;
   border: 2px solid #000;
   margin-top: 0%;
@@ -224,9 +224,23 @@ input {
   line-height: 150%;
 }
 
-.cv button:hover {
+.cv .delete-button:hover {
   cursor: pointer;
   background-color: #fa7676;
+}
+
+.cv .edit-button {
+  background-color: #0f0;
+  border: 2px solid #000;
+  margin-top: 0%;
+  font-family: sans-serif;
+  font-size: 1em;
+  line-height: 150%;
+}
+
+.cv .edit-button:hover {
+  cursor: pointer;
+  background-color: #8f8;
 }
 
 footer {

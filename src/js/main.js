@@ -1,6 +1,6 @@
 "use strict";
 
-let url = "http://127.0.0.1:3000/jobs";
+let url = "http://127.0.0.1:3001/jobs";
 
 let cvArticle = document.getElementById('cvArticle')
 
@@ -53,6 +53,65 @@ async function createCv(companyname, jobtitle, location) {
     }
 }
 
+async function editCv(cvId, currentData) {
+    // Skapa ett redigeringsformulär
+    const form = document.createElement("form");
+
+    const companynameInput = document.createElement("input");
+    companynameInput.type = "text";
+    companynameInput.value = currentData.companyname;
+
+    const jobtitleInput = document.createElement("input");
+    jobtitleInput.type = "text";
+    jobtitleInput.value = currentData.jobtitle;
+
+    const locationInput = document.createElement("input");
+    locationInput.type = "text";
+    locationInput.value = currentData.location;
+
+    const updateButton = document.createElement("button");
+    updateButton.textContent = "Uppdatera";
+
+    // Lyssna på uppdateringsknappen
+    updateButton.addEventListener("click", async (event) => {
+        event.preventDefault();
+
+        const updatedData = {
+            companyname: companynameInput.value,
+            jobtitle: jobtitleInput.value,
+            location: locationInput.value
+        };
+
+        await updateCvData(cvId, updatedData);
+    });
+
+    form.appendChild(companynameInput);
+    form.appendChild(jobtitleInput);
+    form.appendChild(locationInput);
+    form.appendChild(updateButton);
+
+    cvArticle.innerHTML = ""; // Rensa CV-artikeln
+    cvArticle.appendChild(form);
+}
+
+async function updateCvData(cvId, updates) {
+    try {
+        const response = await fetch(`${url}/${cvId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(updates)
+        });
+
+        const data = await response.json();
+        console.log(data);
+        getData(); // Uppdatera datan på skärmen efter uppdatering
+    } catch (error) {
+        console.error("Error updating CV:", error);
+    }
+}
+
 function displayCvData(cvData) {
     cvArticle.innerHTML = ""; // Rensa tidigare data
 
@@ -69,8 +128,16 @@ function displayCvData(cvData) {
         let locationElement = document.createElement("p");
         locationElement.textContent = "Plats: " + cv.location;
 
+        let editButton = document.createElement("button");
+        editButton.textContent = "Uppdatera";
+        editButton.classList.add("edit-button"); // Lägg till klassen för redigeringsknappen
+        editButton.addEventListener("click", async () => {
+            await editCv(cv._id, cv); // Anropa funktionen för att redigera CV-informationen
+        });
+
         let deleteButton = document.createElement("button");
         deleteButton.textContent = "Ta bort";
+        deleteButton.classList.add("delete-button"); // Lägg till klassen för borttagn
         deleteButton.addEventListener("click", async () => {
             await deleteCv(cv._id); // Anropa funktionen för att ta bort CV-informationen
         });
@@ -79,6 +146,7 @@ function displayCvData(cvData) {
         cvElement.appendChild(jobTitleElement);
         cvElement.appendChild(locationElement);
         cvElement.appendChild(deleteButton); // Lägg till knappen för att ta bort
+        cvElement.appendChild(editButton); // Lägg till knappen för att redigera
 
         cvArticle.appendChild(cvElement);
     });
